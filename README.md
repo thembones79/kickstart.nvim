@@ -79,7 +79,7 @@ Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
 #### Clone the repository
 
 ```pwsh
-git clone https://github.com/thembones79/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
+git clone https://github.com/thembones79/kickstart.nvim.git $env:LOCALAPPDATA\nvim
 ```
 
 
