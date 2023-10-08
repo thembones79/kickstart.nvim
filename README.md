@@ -36,18 +36,58 @@ Neovim's configurations are located under the following paths, depending on your
 | MacOS | `$XDG_CONFIG_HOME/nvim`, '~/.config/nvim` |
 | Windows | `%userprofile%\AppData\Local\nvim\` |
 
-Clone kickstart.nvim:
 
-```sh
-# on Linux and Mac
+
+
+
+## 🛠️ Installation
+
+### Linux/Mac OS (Unix)
+
+#### Make a backup of your current nvim and shared folder
+
+```shell
+mv ~/.config/nvim ~/.config/nvim.old
+mv ~/.local/share/nvim ~/.local/share/nvim.old
+mv ~/.local/state/nvim ~/.local/state/nvim.old
+mv ~/.cache/nvim ~/.cache/nvim.old
+```
+
+#### Clone the repository
+
+```shell
 git clone https://github.com/thembones79/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
+### Windows (Powershell)
 
+#### Make a backup of your current nvim and nvim-data folder
+
+```pwsh
+Rename-Item -Path $env:LOCALAPPDATA\nvim -NewName $env:LOCALAPPDATA\nvim.bak
+Rename-Item -Path $env:LOCALAPPDATA\nvim-data -NewName $env:LOCALAPPDATA\nvim-data.bak
 ```
-# on Windows
+
+or
+
+```pwsh
+Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
+Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
+```
+
+
+#### Clone the repository
+
+```pwsh
 git clone https://github.com/thembones79/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
 ```
+
+
+
+
+
+
+
 
 ### Post Installation
 
