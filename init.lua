@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -199,6 +199,54 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+----------------------------------------------------------------
+
+vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
+vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+
+vim.keymap.set('n', '<leader>1', function()
+  require('harpoon.ui').nav_file(1)
+end)
+vim.keymap.set('n', '<leader>2', function()
+  require('harpoon.ui').nav_file(2)
+end)
+vim.keymap.set('n', '<leader>3', function()
+  require('harpoon.ui').nav_file(3)
+end)
+vim.keymap.set('n', '<leader>4', function()
+  require('harpoon.ui').nav_file(4)
+end)
+vim.keymap.set('n', '<leader>5', function()
+  require('harpoon.ui').nav_file(5)
+end)
+vim.keymap.set('n', '<leader>6', function()
+  require('harpoon.ui').nav_file(6)
+end)
+vim.keymap.set('n', '<leader>7', function()
+  require('harpoon.ui').nav_file(7)
+end)
+vim.keymap.set('n', '<leader>8', function()
+  require('harpoon.ui').nav_file(8)
+end)
+vim.keymap.set('n', '<leader>9', function()
+  require('harpoon.ui').nav_file(9)
+end)
+
+vim.keymap.set('n', '<leader>;', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set('n', '<leader>ss', ':mks! ~/.vim/sessions/', { desc = 'Session Save to...' })
+vim.keymap.set('n', '<leader>sl', ':so ~/.vim/sessions/', { desc = 'Session Load from...' })
+vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
+
+vim.keymap.set('n', '<F4>', ':wa<Bar>exe "mksession! " .. v:this_session<CR>:so ~/.vim/sessions/')
+vim.keymap.set('n', 'gl', ':wa<Bar>exe "mksession! " .. v:this_session<CR>:so ~/.vim/sessions/', { desc = 'Go save this session and LOAD from...' })
+vim.keymap.set('n', 'g1', ':wa<Bar>exe "mksession! " .. v:this_session<CR>:so ~/.vim/sessions/nvim<CR>', { desc = 'Go to Nvim Config' })
+vim.keymap.set('n', 'g2', ':wa<Bar>exe "mksession! " .. v:this_session<CR>:so ~/.vim/sessions/sway<CR>', { desc = 'Go to Nvim Config' })
+vim.keymap.set('n', 'gs', ':wa<Bar>exe "mksession! " .. v:this_session<CR>', { desc = 'Go Save This Session' })
+vim.keymap.set('n', '-', ':wa<Bar>exe "mksession! " .. v:this_session<CR>', { desc = 'Go Save This Session' })
+vim.keymap.set('n', '--', ':wa<Bar>exe "mksession! " .. v:this_session<CR>:so ~/.vim/sessions/', { desc = 'Go save this session and LOAD from...' })
+
+----------------------------------------------------------------
+
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
@@ -255,7 +303,25 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
+  --
+  --
+  --
+  --
+  ------------------------------------------------------------------------
+  'theprimeagen/harpoon',
 
+  'thembones79/mine-pine',
+  ------------------------------------------------------------------------
+  --
+  --
+  --
+  --
+  --
+  --
+  --
+  --
+  --
+  --
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
