@@ -200,37 +200,36 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 ----------------------------------------------------------------
-
-vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
-vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
-
-vim.keymap.set('n', '<leader>1', function()
-  require('harpoon.ui').nav_file(1)
-end)
-vim.keymap.set('n', '<leader>2', function()
-  require('harpoon.ui').nav_file(2)
-end)
-vim.keymap.set('n', '<leader>3', function()
-  require('harpoon.ui').nav_file(3)
-end)
-vim.keymap.set('n', '<leader>4', function()
-  require('harpoon.ui').nav_file(4)
-end)
-vim.keymap.set('n', '<leader>5', function()
-  require('harpoon.ui').nav_file(5)
-end)
-vim.keymap.set('n', '<leader>6', function()
-  require('harpoon.ui').nav_file(6)
-end)
-vim.keymap.set('n', '<leader>7', function()
-  require('harpoon.ui').nav_file(7)
-end)
-vim.keymap.set('n', '<leader>8', function()
-  require('harpoon.ui').nav_file(8)
-end)
-vim.keymap.set('n', '<leader>9', function()
-  require('harpoon.ui').nav_file(9)
-end)
+-- vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
+-- vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+--
+-- vim.keymap.set('n', '<leader>1', function()
+--   require('harpoon.ui').nav_file(1)
+-- end)
+-- vim.keymap.set('n', '<leader>2', function()
+--   require('harpoon.ui').nav_file(2)
+-- end)
+-- vim.keymap.set('n', '<leader>3', function()
+--   require('harpoon.ui').nav_file(3)
+-- end)
+-- vim.keymap.set('n', '<leader>4', function()
+--   require('harpoon.ui').nav_file(4)
+-- end)
+-- vim.keymap.set('n', '<leader>5', function()
+--   require('harpoon.ui').nav_file(5)
+-- end)
+-- vim.keymap.set('n', '<leader>6', function()
+--   require('harpoon.ui').nav_file(6)
+-- end)
+-- vim.keymap.set('n', '<leader>7', function()
+--   require('harpoon.ui').nav_file(7)
+-- end)
+-- vim.keymap.set('n', '<leader>8', function()
+--   require('harpoon.ui').nav_file(8)
+-- end)
+-- vim.keymap.set('n', '<leader>9', function()
+--   require('harpoon.ui').nav_file(9)
+-- end)
 
 vim.keymap.set('n', '<leader>;', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set('n', '<leader>ss', ':mks! ~/.vim/sessions/', { desc = 'Session Save to...' })
@@ -308,8 +307,100 @@ require('lazy').setup({
   --
   --
   ------------------------------------------------------------------------
-  'theprimeagen/harpoon',
+  'nvim-lua/plenary.nvim',
+  -- {
+  --   'theprimeagen/harpoon',
+  --   lazy = false,
+  --   config = function()
+  --     vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
+  --     vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
+  --   end,
+  -- },
 
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    lazy = false,
+    config = function()
+      local harpoon = require 'harpoon'
+      harpoon:setup {}
+
+      -- File Operations
+      vim.keymap.set('n', '<leader>0', function()
+        harpoon:list():append()
+      end, { desc = 'Harpoon: Add current file' })
+      vim.keymap.set('n', '<leader>ha', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = 'Harpoon: List all Harpoon files' })
+
+      -- File Selection
+      vim.keymap.set('n', '<leader>1', function()
+        harpoon:list():select(1)
+      end, { desc = 'Harpoon: Select Harpoon file 1' })
+      vim.keymap.set('n', '<leader>2', function()
+        harpoon:list():select(2)
+      end, { desc = 'Harpoon: Select Harpoon file 2' })
+      vim.keymap.set('n', '<leader>3', function()
+        harpoon:list():select(3)
+      end, { desc = 'Harpoon: Select Harpoon file 3' })
+      vim.keymap.set('n', '<leader>4', function()
+        harpoon:list():select(4)
+      end, { desc = 'Harpoon: Select Harpoon file 4' })
+      vim.keymap.set('n', '<leader>5', function()
+        harpoon:list():select(5)
+      end, { desc = 'Harpoon: Select Harpoon file 5' })
+      vim.keymap.set('n', '<leader>6', function()
+        harpoon:list():select(6)
+      end, { desc = 'Harpoon: Select Harpoon file 6' })
+      vim.keymap.set('n', '<leader>7', function()
+        harpoon:list():select(7)
+      end, { desc = 'Harpoon: Select Harpoon file 7' })
+      vim.keymap.set('n', '<leader>8', function()
+        harpoon:list():select(8)
+      end, { desc = 'Harpoon: Select Harpoon file 8' })
+      vim.keymap.set('n', '<leader>9', function()
+        harpoon:list():select(9)
+      end, { desc = 'Harpoon: Select Harpoon file 9' })
+
+      vim.keymap.set('n', '<leader>hda', function()
+        harpoon:list():clear()
+      end, { desc = 'Harpoon: Clear all Harpoon files' })
+      vim.keymap.set('n', '<leader>hdh', function()
+        harpoon:list():removeAt(1)
+      end, { desc = 'Harpoon: Clear Harpoon file 1' })
+      vim.keymap.set('n', '<leader>hdj', function()
+        harpoon:list():removeAt(2)
+      end, { desc = 'Harpoon: Clear Harpoon file 2' })
+      vim.keymap.set('n', '<leader>hdk', function()
+        harpoon:list():removeAt(3)
+      end, { desc = 'Harpoon: Clear Harpoon file 3' })
+      vim.keymap.set('n', '<leader>hdl', function()
+        harpoon:list():removeAt(4)
+      end, { desc = 'Harpoon: Clear Harpoon file 4' })
+    end,
+  },
+
+  -- {
+  --     "ThePrimeagen/harpoon",
+  --     branch = "harpoon2",
+  --     lazy = false,
+  --     dependencies = { "nvim-lua/plenary.nvim" },
+  --     config = function()
+  --
+  -- local harpoon = require 'harpoon'
+  --
+  -- -- REQUIRED
+  -- harpoon:setup()
+  -- -- REQUIRED
+  --
+  --
+  --
+  --
+  --     end,
+  -- },
   'thembones79/mine-pine',
   ------------------------------------------------------------------------
   --
