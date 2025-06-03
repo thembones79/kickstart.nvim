@@ -105,10 +105,13 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
+
+vim.o.cursorcolumn = true
+vim.o.wrap = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
@@ -185,10 +188,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -200,39 +203,9 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 ----------------------------------------------------------------
--- vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
--- vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
---
--- vim.keymap.set('n', '<leader>1', function()
---   require('harpoon.ui').nav_file(1)
--- end)
--- vim.keymap.set('n', '<leader>2', function()
---   require('harpoon.ui').nav_file(2)
--- end)
--- vim.keymap.set('n', '<leader>3', function()
---   require('harpoon.ui').nav_file(3)
--- end)
--- vim.keymap.set('n', '<leader>4', function()
---   require('harpoon.ui').nav_file(4)
--- end)
--- vim.keymap.set('n', '<leader>5', function()
---   require('harpoon.ui').nav_file(5)
--- end)
--- vim.keymap.set('n', '<leader>6', function()
---   require('harpoon.ui').nav_file(6)
--- end)
--- vim.keymap.set('n', '<leader>7', function()
---   require('harpoon.ui').nav_file(7)
--- end)
--- vim.keymap.set('n', '<leader>8', function()
---   require('harpoon.ui').nav_file(8)
--- end)
--- vim.keymap.set('n', '<leader>9', function()
---   require('harpoon.ui').nav_file(9)
--- end)
 
 vim.keymap.set('n', '<leader>;', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-vim.keymap.set('n', '<leader>ss', ':mks! ~/.vim/sessions/', { desc = 'Session Save to...' })
+vim.keymap.set('n', '<leader>sv', ':mks! ~/.vim/sessions/', { desc = 'Session Save to...' })
 vim.keymap.set('n', '<leader>sl', ':so ~/.vim/sessions/', { desc = 'Session Load from...' })
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
 
@@ -308,14 +281,6 @@ require('lazy').setup({
   --
   ------------------------------------------------------------------------
   'nvim-lua/plenary.nvim',
-  -- {
-  --   'theprimeagen/harpoon',
-  --   lazy = false,
-  --   config = function()
-  --     vim.keymap.set('n', '<leader>0', require('harpoon.mark').add_file)
-  --     vim.keymap.set('n', '<C-e>', require('harpoon.ui').toggle_quick_menu)
-  --   end,
-  -- },
 
   {
     'ThePrimeagen/harpoon',
@@ -383,24 +348,6 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --     "ThePrimeagen/harpoon",
-  --     branch = "harpoon2",
-  --     lazy = false,
-  --     dependencies = { "nvim-lua/plenary.nvim" },
-  --     config = function()
-  --
-  -- local harpoon = require 'harpoon'
-  --
-  -- -- REQUIRED
-  -- harpoon:setup()
-  -- -- REQUIRED
-  --
-  --
-  --
-  --
-  --     end,
-  -- },
   'thembones79/mine-pine',
   ------------------------------------------------------------------------
   --
@@ -440,7 +387,12 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'm4xshen/hardtime.nvim',
+    lazy = false,
+    dependencies = { 'MunifTanjim/nui.nvim' },
+    opts = {},
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -1130,18 +1082,18 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
