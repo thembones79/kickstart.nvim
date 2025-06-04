@@ -204,7 +204,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 ----------------------------------------------------------------
 vim.cmd 'set guifont=BigBlueTermPlus\\ Nerd\\ Font:h9'
-vim.cmd 'let g:neovide_transparency=0.95'
+vim.cmd 'let g:neovide_opacity=0.95'
 vim.keymap.set('n', '<leader>a', ':let g:neovide_scale_factor=2.0<CR>', { desc = 'Bigger font' })
 vim.keymap.set('n', '<leader>c', ':let g:neovide_scale_factor=1.0<CR>', { desc = 'Smaller font' })
 vim.keymap.set('n', '<leader>z', ':let g:neovide_scale_factor=1.2<CR>', { desc = 'Mid font' })
