@@ -203,6 +203,13 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 ----------------------------------------------------------------
+vim.cmd 'set guifont=BigBlueTermPlus\\ Nerd\\ Font:h9'
+vim.cmd 'let g:neovide_transparency=0.95'
+vim.keymap.set('n', '<leader>a', ':let g:neovide_scale_factor=2.0<CR>', { desc = 'Bigger font' })
+vim.keymap.set('n', '<leader>c', ':let g:neovide_scale_factor=1.0<CR>', { desc = 'Smaller font' })
+vim.keymap.set('n', '<leader>z', ':let g:neovide_scale_factor=1.2<CR>', { desc = 'Mid font' })
+
+vim.keymap.set('n', 'gp', 'mmgg<cmd>silent %!prettier --stdin-filepath %<CR>``zz')
 
 vim.keymap.set('n', '<leader>;', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set('n', '<leader>sv', ':mks! ~/.vim/sessions/', { desc = 'Session Save to...' })
@@ -297,7 +304,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>0', function()
         harpoon:list():append()
       end, { desc = 'Harpoon: Add current file' })
-      vim.keymap.set('n', '<leader>ha', function()
+      vim.keymap.set('n', '<leader>m', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end, { desc = 'Harpoon: List all Harpoon files' })
 
