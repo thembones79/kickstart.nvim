@@ -235,6 +235,12 @@ sudo dnf install -y gcc make git ripgrep fd-find unzip neovim
 
 <details><summary>Arch Install Steps</summary>
 
+```
+sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
+```
+
+
+</details>
 
 
 
@@ -313,12 +319,7 @@ git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data
 ```
 
 
-[The full video of ThePrimeagen setting up this repo](https://www.youtube.com/watch?v=w7i4amO_zaE)
 
 
 
-
-sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
-```
-</details>
 
