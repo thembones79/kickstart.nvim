@@ -358,7 +358,7 @@ require('lazy').setup({
 
       -- File Operations
       vim.keymap.set('n', '<leader>0', function()
-        harpoon:list():append()
+        harpoon:list():add()
       end, { desc = 'Harpoon: Add current file' })
       vim.keymap.set('n', '<leader>m', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
