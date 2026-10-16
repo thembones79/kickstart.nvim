@@ -90,6 +90,9 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Prevent noisy language servers from filling Neovim's lsp.log.
+vim.lsp.log.set_level('OFF')
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -855,7 +858,26 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-
+        rust_analyzer = {
+          ['rust-analyzer'] = {
+            checkOnSave = {
+              command = 'clippy',
+            },
+          },
+        },
+        clangd = {
+          cmd = { 'clangd', '--background-index' },
+          -- Optional: explicitly add Raylib include path
+          -- If you're not using compile_commands.json
+          init_options = {
+            clangdFileStatus = true,
+          },
+          -- Add this if you want to hardcode the include path
+          -- but it's better to use compile_commands.json or .clangd
+          -- settings = {
+          --   compilationDatabasePath = "build",
+          -- },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
